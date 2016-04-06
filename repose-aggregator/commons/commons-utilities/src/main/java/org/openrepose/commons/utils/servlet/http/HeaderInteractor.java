@@ -93,6 +93,7 @@ public interface HeaderInteractor {
      */
     List<String> getPreferredSplittableHeadersWithParameters(String headerName);
 
+    // todo: accept var args
     /**
      * Adds the specified header with the header name and header value pair.
      * This creates a new header entry under the given name.
@@ -113,6 +114,7 @@ public interface HeaderInteractor {
      */
     void addHeader(String headerName, String headerValue, double quality);
 
+    // todo: rename replaceHeader to setHeader
     /**
      * Replaces the specified header with the header name and header value pair.
      * This replaces all values of a header with that name.

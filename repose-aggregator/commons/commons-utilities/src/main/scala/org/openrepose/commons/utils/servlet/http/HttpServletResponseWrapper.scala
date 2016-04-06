@@ -260,6 +260,7 @@ class HttpServletResponseWrapper(originalResponse: HttpServletResponse, headerMo
     */
   def getOutputStreamAsInputStream: InputStream = bodyOutputStream.getOutputStreamAsInputStream
 
+  // todo: overload with a single string argument to make things easier?
   /**
     * @throws IllegalStateException when bodyMode is anything other than ResponseMode.MUTABLE
     */

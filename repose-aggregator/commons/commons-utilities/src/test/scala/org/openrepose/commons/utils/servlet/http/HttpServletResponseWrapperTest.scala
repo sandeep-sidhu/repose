@@ -2004,4 +2004,10 @@ class HttpServletResponseWrapperTest extends FunSpec with BeforeAndAfter with Ma
       wrappedResponse.isCommitted shouldBe true
     }
   }
+
+  describe("sendError") {
+    it("should not write through to the original output stream through multiple wrappers") {
+      pending
+    }
+  }
 }

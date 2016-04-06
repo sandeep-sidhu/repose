@@ -164,6 +164,10 @@ class HttpServletRequestWrapperTest extends FunSpec with BeforeAndAfter with Mat
       wrappedRequest = new HttpServletRequestWrapper(mockRequest)
       wrappedRequest.getHeaderNames.hasMoreElements shouldBe false
     }
+
+    it("should not alphabetically order headers") {
+      wrappedRequest.getHeaderNames.asScala.toList should not contain inOrder ("abc", "awesomeTime", "banana-phone", "cup", "foo", "ornament", "thumbs")
+    }
   }
 
   describe("the getIntHeader method") {

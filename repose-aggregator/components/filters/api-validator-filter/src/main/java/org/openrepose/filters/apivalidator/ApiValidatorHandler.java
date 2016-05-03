@@ -142,6 +142,30 @@ public class ApiValidatorHandler {
                         LOG.warn("Validator not available for request: {}", validatorInfo.getUri());
                         response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);
                     } else {
+                        /** NOTE: This note should really be on DelegationHandler in api-checker, but that code is
+                         * not part of this project. Anyway, api-checker is definitely closing the request input
+                         * stream in certain cases. The problem is, if we're delegating, api-checker takes the
+                         * request with a closed input stream and uses it to call doFilter (in the
+                         * DelegationHandler). Once that is done, no downstream component can read the input stream,
+                         * period.
+                         *
+                         * As an aside, since api-checker actually returns super.getInputStream in some cases,
+                         * the input stream of the request passed to a validator may be closed. In that case, unless
+                         * some component upstream passed an InputStream that can be read after having close() called on
+                         * it, the request InputStream will be closed and unreadable to all upstream components as well.
+                         *
+                         * The stream is closed by the XSL class in api-checker. Specifically, the checkStep(...) method
+                         * calls transformer.transform(...) which closes the stream.
+                         *
+                         * The best solution likely lies in api-checker. The InputStream should not be closed when
+                         * delegating.
+                         * Alternatively, the ApiValidatorHandler could be responsible for calling doFilter so that
+                         * it can wrap the request appropriately. Of course, since api-checker enriches the request,
+                         * if the ApiValidatorHandler took over calling doFilter, it would need to do so by passing
+                         * a modifier filter chain where doFilter calls back into the handler. That way, the handler
+                         * would have all of the enriched data, and if the InputStream is closed, the handler could
+                         * revert to using the InputStream before it was read/closed by api-checker.
+                          */
                         lastValidatorResult = validator.validate(wrappedRequest, response, chain);
                         isValid = lastValidatorResult.valid();
                         if (isValid) {

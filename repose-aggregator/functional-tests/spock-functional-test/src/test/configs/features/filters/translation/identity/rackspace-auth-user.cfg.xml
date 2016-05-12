@@ -1,0 +1,10 @@
+<rackspace-auth-user xmlns='http://docs.openrepose.org/rackspace-auth-user/v1.0'>
+    <v1_1 content-body-read-limit="1024">
+        <group>1_1_Auth_Group</group>
+        <quality>0.80</quality>
+    </v1_1>
+    <v2_0 content-body-read-limit="1024">
+        <group>2_0_Auth_Group</group>
+        <quality>0.80</quality>
+    </v2_0>
+</rackspace-auth-user>

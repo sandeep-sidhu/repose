@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<system-model xmlns="http://docs.rackspacecloud.com/repose/system-model/v2.0">
+    <repose-cluster id="repose-ga-service" rewrite-host-header="false">
+        <nodes>
+            <node id="proxy-n01" hostname="localhost" http-port="${reposePort}"/>
+            <!--<node id="proxy-n02" hostname="s-int-api2.cidm.ord1.corp.rackspace.com" http-port="14080" https-port="14081" />-->
+            <!--<node id="proxy-n03" hostname="s-int-api3.cidm.ord1.corp.rackspace.com" http-port="14080" https-port="14081" />-->
+            <!--<node id="proxy-n04" hostname="s-int-api4.cidm.ord1.corp.rackspace.com" http-port="14080" https-port="14081" />-->
+        </nodes>
+
+        <filters>
+            <filter name="ip-identity"/>
+            <filter name="uri-identity"/>
+            <filter name="slf4j-http-logging"/>
+            <filter name="rate-limiting"/>
+            <filter name="content-type-stripper"/>
+            <filter name="translation" configuration="translation.cfg.xml"/>
+            <filter name="translation" configuration="v3-translation.cfg.xml" uri-regex="/(cloud/?)?"/>
+        </filters>
+
+        <destinations>
+            <endpoint id="ga_service" protocol="http" hostname="localhost" port="${targetPort}" root-path=""
+                      default="true"/>
+        </destinations>
+    </repose-cluster>
+</system-model>

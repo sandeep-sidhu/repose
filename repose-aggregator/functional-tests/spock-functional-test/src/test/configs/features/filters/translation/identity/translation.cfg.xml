@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  We do this to block XML bombs per Prod Sec: http://msdn.microsoft.com/en-us/magazine/ee335713.aspx
+
+  This is accomplished via allow-doctype-decl="true",
+  but we have to do 'something' in the translation block else its a no-op.
+
+  We do a trio of things here:
+  - request-translation: match on the content-type "application/xml",
+    it will forward it as "application/xml" (no-op)
+  - xsl:output: no matter what character encoding comes in, it will always convert to UTF-8
+  - xsl:template + xsl:copy: copy everything through without changing anything (no-op)
+
+-->
+
+<translation xmlns="http://docs.rackspacecloud.com/repose/translation/v1.0" allow-doctype-decl="false">
+    <request-translations>
+        <request-translation http-methods="PUT POST" content-type="application/xml" translated-content-type="application/xml">
+            <style-sheets>
+                <style id="copy">
+                    <xsl>
+                        <xsl:stylesheet
+                            xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                            xmlns:httpx="http://openrepose.org/repose/httpx/v1.0"
+                            version="2.0">
+
+                            <xsl:output method="xml" encoding="UTF-8"/>
+
+                            <xsl:template match="node() | @*">
+                                <xsl:copy>
+                                    <xsl:apply-templates select="@* | node()"/>
+                                </xsl:copy>
+                            </xsl:template>
+                        </xsl:stylesheet>
+                    </xsl>
+                </style>
+            </style-sheets>
+        </request-translation>
+    </request-translations>
+</translation>

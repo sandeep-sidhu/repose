@@ -1,0 +1,10 @@
+<header-identity xmlns='http://docs.api.rackspacecloud.com/repose/header-identity/v1.0'>
+ 
+   <source-headers>
+      <!-- Where there is more than one header quality says which
+           wins.  IP ratelimitng also has quality.  If IP and X-Auth-Token are both avail
+           then the quality says which rate limit wins here too -->
+      <header id="X-Auth-Token" quality=".5"/>
+   </source-headers>
+ 
+</header-identity>

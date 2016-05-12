@@ -16,9 +16,10 @@ class TranslateResponseTest extends ReposeValveTest {
 
         def params = properties.getDefaultTemplateParams()
         repose.configurationProvider.applyConfigs("common", params)
-        repose.configurationProvider.applyConfigs("features/filters/translation/common", params)
-        repose.configurationProvider.applyConfigs("features/filters/translation/response", params)
-        repose.start()
+//        repose.configurationProvider.applyConfigs("features/filters/translation/common", params)
+//        repose.configurationProvider.applyConfigs("features/filters/translation/response", params)
+        repose.configurationProvider.applyConfigs("features/filters/translation/identity", params)
+        repose.start(waitOnJmxAfterStarting: false)
         repose.waitForNon500FromUrl(reposeEndpoint)
     }
 
@@ -73,7 +74,7 @@ class TranslateResponseTest extends ReposeValveTest {
         when:
         def mc = deproxy.makeRequest(url: reposeEndpoint + "/cloud",
                 method: "GET",
-                headers: [],
+                headers: ["accept": "application/json"],
                 requestBody: "something",
                 defaultHandler: resp)
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rate-limiting xmlns="http://docs.rackspacecloud.com/repose/rate-limiting/v1.0">
+    <!--
+        Defines an endpoint with a matching regex to bind GET requests for
+        returning live rate limiting information.
+    -->
+    <request-endpoint uri-regex="/limits/?" />
+    
+    <!--
+        Defining a limit group.
+
+        The following headers can be found in the class
+        com.rackspace.cloud.powerapi.http.PowerApiHeader in the Power API
+        Filterlet library, maven group id com.rackspace.cloud.powerapi, artifact
+        id filterlet.
+
+        Groups are matched on the HTTP header: X-PP-Groups
+        User information is matched on the HTTP header: X-PP-User
+    -->
+
+    <limit-group id="Standard" groups="IP_Standard" default="true">
+        <limit id="01" uri="/*" uri-regex="(/).*" http-methods="ALL" unit="SECOND" value="50" />
+    </limit-group>
+
+    <limit-group id="Super" groups="IP_Super" default="false">
+        <limit id="01" uri="/*" uri-regex="(/).*" http-methods="ALL" unit="SECOND" value="500" />
+    </limit-group>
+
+    <limit-group id="MFA_Verify_By_User_ID" groups="User_Standard" default="false">
+        <limit id="all" uri="/v2.0/users/*/RAX-AUTH/multi-factor/mobile-phones/*/verificationcode" uri-regex="(/).*/v2.0/users/[\w\d]*/RAX-AUTH/multi-factor/mobile-phones/[\w\d]*/verificationcode" http-methods="POST" unit="DAY" value="100" />
+    </limit-group>
+
+</rate-limiting>

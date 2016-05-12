@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- http://wiki.openrepose.org/display/REPOSE/HTTP+Logging+Filter -->
+<http-logging xmlns="http://docs.rackspacecloud.com/repose/http-logging/v1.0">
+    <!-- The id attribute is to help the user easily identify the log -->
+    <!-- The format includes what will be logged. The arguments with % are a subset of the apache mod_log_config found at http://httpd.apache.org/docs/2.2/mod/mod_log_config.html#formats -->
+
+    <!-- Legend:
+    received:           %t                      |Time_Request_Received|,
+    duration:           %T                      |Time_Taken_to_Complete|,
+    method:             %m                      |Request_Method|,
+    path:               %U                      |URL_Path_Requested|,
+    status:             %s                      |Status|,
+    remote_ip:          %a                      |Remote_IP|,
+    x_forward:          %{x-forwarded-for}i     |Remote_IP_Before_Proxy|
+    remote_host:        %h                      |Remote_Host|,
+    remote_user:        %u                      |Remote_User|,
+    reponse_size        %b                      |Response_Size_bytes|,
+    query_string        %q                      |Query_String|,
+    local_ip            %A                      |Local_IP|,
+    server_port         %p                      |Server_Port|,
+    user_agent          %{user-agent}i          |User_Agent|,
+    content_type        %{content-type}i        |Content_type|,
+    accept              %{accept}i              |Accept|,
+    rate_limit_group    %{X-PP-Groups}i         |Rate Limit Group (IP Based)|
+    -->
+
+    <http-log id="http-log" format="{&quot;received&quot;:&quot;%t&quot;,&quot;duration&quot;:&quot;%T&quot;,&quot;method&quot;:&quot;%m&quot;,&quot;path&quot;:&quot;%U&quot;,&quot;status&quot;:&quot;%s&quot;,&quot;remote_ip&quot;:&quot;%a&quot;,&quot;x_forwarded_for&quot;:&quot;%{x-forwarded-for}i&quot;,&quot;remote_host&quot;:&quot;%h&quot;,&quot;remote_user&quot;:&quot;%u&quot;,&quot;response_size&quot;:&quot;%b&quot;,&quot;query_string&quot;:&quot;%q&quot;,&quot;local_ip&quot;:&quot;%A&quot;,&quot;server_port&quot;:&quot;%p&quot;,&quot;user_agent&quot;:&quot;%{user-agent}i&quot;,&quot;content_type&quot;:&quot;%{content-type}i&quot;,&quot;accept&quot;:&quot;%{accept}i&quot;,&quot;rate_limit_group&quot;:&quot;%{X-PP-Groups}i&quot;}">
+
+        <targets>
+            <!-- The actual log file -->
+            <file location="/var/log/repose/http.log"/>
+        </targets>
+    </http-log>
+</http-logging>

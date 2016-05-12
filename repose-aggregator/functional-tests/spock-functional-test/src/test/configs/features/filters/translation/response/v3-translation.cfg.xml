@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<translation xmlns="http://docs.rackspacecloud.com/repose/translation/v1.0" allow-doctype-decl="true">
+    <response-translations>
+        <response-translation content-type="application/json"
+                              translated-content-type="application/json">
+            <style-sheets>
+                <style id="versionchange" href="version_change.xsl"/>
+                <style id="json" href="jsonx2json.xsl"/>
+            </style-sheets>
+        </response-translation>
+    </response-translations>
+</translation>

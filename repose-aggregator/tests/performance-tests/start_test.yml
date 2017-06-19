@@ -11,6 +11,7 @@
   vars_files:
       - test_vars/{{ perf_test }}.yml
   roles:
+    - jmxtrans
     - repose
 
 - hosts: test_agent

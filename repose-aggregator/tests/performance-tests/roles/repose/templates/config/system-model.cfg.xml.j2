@@ -27,6 +27,7 @@
             {% for service in repose.config.system_model.services %}
             <service name="{{ service }}"/>
             {% endfor %}
+            # TODO: Always add metric service -- just the config file right now, not a service here
         </services>
 
         <destinations>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<http-connection-pools xmlns="http://docs.openrepose.org/repose/http-connection-pool/v1.0">
+
+    <pool id="default"
+          default="true"
+          chunked-encoding="false"
+          http.conn-manager.max-total="1500"
+          http.conn-manager.max-per-route="1000"
+          http.socket.timeout="90000"/>
+</http-connection-pools>

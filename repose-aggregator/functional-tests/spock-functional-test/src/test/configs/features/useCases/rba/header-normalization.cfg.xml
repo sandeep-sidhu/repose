@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<header-normalization xmlns='http://docs.openrepose.org/repose/header-normalization/v1.0'>
+    <header-filters>
+        <target>
+            <blacklist id="ReposeHeaders" >
+                <!-- Remove the headers that Repose will add with client-auth filter -->
+                <header id="X-Authorization"/>
+                <header id="X-Contact-Id"/>
+                <header id="X-Device-Id"/>
+                <header id="X-Identity-Status"/>
+                <header id="X-Impersonator-Id"/>
+                <header id="X-Impersonator-Name"/>
+                <header id="X-PP-Groups" />
+                <header id="X-PP-User" />
+                <header id="X-Roles"/>
+                <header id="X-Tenant-Id"/>
+                <header id="X-Tenant-Name"/>
+                <header id="X-User-Id"/>
+                <header id="X-User-Name"/>
+            </blacklist>
+        </target>
+    </header-filters>
+</header-normalization>

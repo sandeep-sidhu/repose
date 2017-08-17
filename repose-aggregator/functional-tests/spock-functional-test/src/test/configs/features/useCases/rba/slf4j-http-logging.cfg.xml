@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<slf4j-http-logging xmlns="http://docs.openrepose.org/repose/slf4j-http-logging/v1.0">
+    <slf4j-http-log id="access-log"
+                    format="RemoteIP=%a Size=%b RequestTime=%T Method=%m Status=%s RequestedResource=%U "/>
+</slf4j-http-logging>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<scripting xmlns="http://docs.openrepose.org/repose/scripting/v1.0"
+           language="groovy">
+    def saxonHome = System.getenv("SAXON_HOME")
+    println("SAXON_HOME: $saxonHome")
+    if (saxonHome != null) {
+        response.addHeader("SAXON_HOME", saxonHome)
+        filterChain.doFilter(request, response)
+    } else {
+        response.sendError(419)
+    }
+</scripting>
